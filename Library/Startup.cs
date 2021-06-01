@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +39,14 @@ namespace Library
         options.Password.RequireUppercase = false;
         options.Password.RequiredUniqueChars = 0;
       });
+      // TODO - update auth based on roles
+      // services.AddControllers(config =>
+      // {
+      //   var policy = new AuthorizationPolicyBuilder()
+      //                     .RequireAuthenticatedUser()
+      //                     .Build();
+      //   config.Filters.Add(new AuthorizeFilter(policy));
+      // });
     }
     public void Configure(IApplicationBuilder app)
     {
