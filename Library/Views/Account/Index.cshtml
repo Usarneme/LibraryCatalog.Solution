@@ -1,7 +1,3 @@
-@{
-  Layout = "_Layout";
-}
-
 @using System.Security.Claims
 
 <h2>Authentication with Identity</h2>
@@ -9,9 +5,9 @@
 @if (User.Identity.IsAuthenticated)
 {
   <p>Hello @User.Identity.Name!</p>
-  @using (Html.BeginForm("LogOff", "Account"))
+  @using (Html.BeginForm("LogOut", "Account", new { message = "You gone!" }))
   {
-    <input type="submit" class="btn btn-default" value="Log out" />
+    <input type="submit" class="btn btn-default btn-outline-primary" value="Log Out" />
   }
 }
 else

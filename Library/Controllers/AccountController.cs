@@ -9,12 +9,12 @@ using Library.ViewModels;
 namespace Library.Controllers
 {
   [AllowAnonymous]
-  public class AccountsController : Controller
+  public class AccountController : Controller
   {
     private readonly LibraryContext _db;
     private readonly UserManager<Patron> _userManager;
     private readonly SignInManager<Patron> _signInManager;
-    public AccountsController(UserManager<Patron> userManager, SignInManager<Patron> signInManager, LibraryContext db)
+    public AccountController(UserManager<Patron> userManager, SignInManager<Patron> signInManager, LibraryContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
@@ -22,10 +22,10 @@ namespace Library.Controllers
     }
 
     [HttpGet("/account")]
-    public IActionResult Index() => View();
+    public ActionResult Index() => View();
 
     [HttpGet("/account/register")]
-    public IActionResult Register() => View();
+    public ActionResult Register() => View();
 
     [HttpPost("account/register")]
     public async Task<ActionResult> Register(RegisterViewModel model)
@@ -44,10 +44,7 @@ namespace Library.Controllers
     }
 
     [HttpGet("/account/login")]
-    public IActionResult Login()
-    {
-      return View();
-    }
+    public ActionResult Login() => View();
 
     [HttpPost("/account/login")]
     public async Task<ActionResult> Login(LoginViewModel model)
@@ -63,9 +60,10 @@ namespace Library.Controllers
       }
     }
 
-    [HttpPost]
-    public async Task<ActionResult> LogOff()
+    [HttpPost("/account/logout{message}")]
+    public async Task<ActionResult> LogOut(string message)
     {
+      Console.WriteLine("SIGN OUT: {0}", message);
       await _signInManager.SignOutAsync();
       return RedirectToAction("Index");
     }
