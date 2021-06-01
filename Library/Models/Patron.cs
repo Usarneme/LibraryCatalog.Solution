@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace Library.Models
 {
-  public class Patron
+  public class Patron : IdentityUser
   {
 
   }

@@ -1,6 +1,6 @@
 namespace Library.Models
 {
-  public class Librarian
+  public class Librarian : Patron
   {
 
   }
