@@ -12,9 +12,9 @@ namespace Library.Controllers
   public class AccountController : Controller
   {
     private readonly LibraryContext _db;
-    private readonly UserManager<Patron> _userManager;
-    private readonly SignInManager<Patron> _signInManager;
-    public AccountController(UserManager<Patron> userManager, SignInManager<Patron> signInManager, LibraryContext db)
+    private readonly UserManager<LibraryUser> _userManager;
+    private readonly SignInManager<LibraryUser> _signInManager;
+    public AccountController(UserManager<LibraryUser> userManager, SignInManager<LibraryUser> signInManager, LibraryContext db)
     {
       _userManager = userManager;
       _signInManager = signInManager;
@@ -28,8 +28,9 @@ namespace Library.Controllers
     public async Task<ActionResult> Register(RegisterViewModel model)
     {
       Console.WriteLine("HIT REGISTER POST ROUTE");
-      var user = new Patron { UserName = model.Email };
+      var user = new LibraryUser { UserName = model.Email };
       IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+      Console.WriteLine(result.ToString());
       if (result.Succeeded)
       {
         return RedirectToAction("Index");

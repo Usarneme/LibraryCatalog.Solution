@@ -16,8 +16,8 @@ namespace Library.Controllers
   public class BooksController : Controller
   {
     private readonly LibraryContext _db;
-    private readonly UserManager<Patron> _userManager;
-    public BooksController(UserManager<Patron> userManager, LibraryContext db)
+    private readonly UserManager<LibraryUser> _userManager;
+    public BooksController(UserManager<LibraryUser> userManager, LibraryContext db)
     {
       _userManager = userManager;
       _db = db;
@@ -34,8 +34,10 @@ namespace Library.Controllers
       Console.WriteLine("ClaimTypes.NameId {0}", x);
       Console.WriteLine($"User {userId}");
       Console.WriteLine("CURRENT USER {0}", currentUser);
+
       // for everybody - 1) available books, 2) checked-out books
       // TODO
+      ViewBag.user = currentUser;
       ViewBag.allBooks = _db.Books.ToList();
       // if Librarian, get: 1) load patrons from checked-out books list
 

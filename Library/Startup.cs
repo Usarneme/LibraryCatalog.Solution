@@ -27,7 +27,7 @@ namespace Library
       services.AddEntityFrameworkMySql()
         .AddDbContext<LibraryContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
-      services.AddIdentity<Patron, IdentityRole>()
+      services.AddIdentity<LibraryUser, IdentityRole>()
         .AddEntityFrameworkStores<LibraryContext>()
         .AddDefaultTokenProviders();
       services.Configure<IdentityOptions>(options =>

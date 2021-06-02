@@ -6,9 +6,9 @@ namespace Library.Models
   {
     public string CheckoutId { get; set; }
     public string BookId { get; set; }
-    public string PatronId { get; set; }
+    public string LibraryUserId { get; set; }
     public DateTime DueDate { get; set; }
     public virtual Book Book { get; set; }
-    public virtual Patron Patron { get; set; }
+    public virtual LibraryUser LibraryUser { get; set; }
   }
 }
