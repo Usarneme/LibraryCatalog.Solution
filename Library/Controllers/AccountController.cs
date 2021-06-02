@@ -21,11 +21,8 @@ namespace Library.Controllers
       _db = db;
     }
 
-    [HttpGet("/account")]
-    public ActionResult Index() => View();
-
-    [HttpGet("/account/register")]
-    public ActionResult Register() => View();
+    [HttpGet("/account")] public ActionResult Index() => View();
+    [HttpGet("/account/register")] public ActionResult Register() => View();
 
     [HttpPost("account/register")]
     public async Task<ActionResult> Register(RegisterViewModel model)

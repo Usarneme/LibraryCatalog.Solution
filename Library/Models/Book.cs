@@ -15,5 +15,6 @@ namespace Library.Models
     public virtual ICollection<Checkout> Checkouts { get; }
     public virtual ICollection<Opus> Opera { get; }
     public string Title { get; set; }
+    public int Copies { get; set; }
   }
 }

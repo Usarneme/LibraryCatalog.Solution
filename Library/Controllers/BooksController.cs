@@ -26,13 +26,13 @@ namespace Library.Controllers
     [HttpGet("/books")]
     public async Task<ActionResult> Index()
     {
-      Console.WriteLine("HIT BOOKS INDEX ROUTE");
       var x = User.FindFirst(ClaimTypes.NameIdentifier);
-      var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      Console.WriteLine($"User {userId}");
-      Console.WriteLine("ClaimTypes.NameId {0}", x);
-      
+      var userId = x?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
+
+      Console.WriteLine("\nHIT BOOKS INDEX ROUTE");
+      Console.WriteLine("ClaimTypes.NameId {0}", x);
+      Console.WriteLine($"User {userId}");
       Console.WriteLine("CURRENT USER {0}", currentUser);
       // for everybody - 1) available books, 2) checked-out books
       // TODO
