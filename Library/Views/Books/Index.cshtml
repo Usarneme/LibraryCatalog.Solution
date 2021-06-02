@@ -1,6 +1,6 @@
 @{
   ViewData["Title"] = "Home Page";
-  bool IsLibrarian = ViewBag.currentUser.IsLibrarian;
+  bool IsLibrarian = ViewBag.user.IsLibrarian;
 }
 
 <div class="text-center">
@@ -17,9 +17,14 @@
       }
       else
       {
+        <h4>Total Books: @ViewBag.allBooks.Count</h4>
         @foreach (Book book in ViewBag.allBooks)
         {
-          <li>@book.Title</li>
+          <li>
+            @book.Title
+            @book.Copies
+            @Html.ActionLink("Check Me Out", book.BookId, "books")
+          </li>
         }
       }
     </ul>

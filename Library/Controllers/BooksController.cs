@@ -23,37 +23,20 @@ namespace Library.Controllers
       _db = db;
     }
 
+    public async Task<LibraryUser> GetUser() => await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+    public Book GetBook(string id) => _db.Books.FirstOrDefault(b => b.BookId == id);
+
+
     [HttpGet("/books")]
     public async Task<ActionResult> Index()
     {
-      var x = User.FindFirst(ClaimTypes.NameIdentifier);
-      var userId = x?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-
-      Console.WriteLine("\nHIT BOOKS INDEX ROUTE");
-      Console.WriteLine("ClaimTypes.NameId {0}", x);
-      Console.WriteLine($"User {userId}");
-      Console.WriteLine("CURRENT USER {0}", currentUser);
-      Console.WriteLine("CURRENT USERNAME {0}", currentUser.UserName);
-      Console.WriteLine("Is Librarian: {0}", currentUser.IsLibrarian);
-
-      // if(currentUser.IsLibrarian) ViewBag.
-      // for everybody - 1) available books, 2) checked-out books
-      // TODO
-      ViewBag.currentUser = currentUser;
+      ViewBag.user = await GetUser();
       ViewBag.allBooks = _db.Books.ToList();
-      // if Librarian, get: 1) load patrons from checked-out books list
-
-      // patron/everybody - get: 1) all books checked out by me
-      // var userItems = _db.Items.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View();
     }
 
-    public ActionResult Create()
-    {
-      // ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-      return View();
-    }
+    public ActionResult Create() => View();
 
     [HttpPost]
     // public async Task<ActionResult> Create(Book b)
@@ -66,6 +49,26 @@ namespace Library.Controllers
       //   BookId = b.BookId 
       // });
       // _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpGet("/books/{BookId}")]
+    public async Task<ActionResult> Details(string BookId)
+    {
+      Book thisBook = GetBook(BookId);
+      ViewBag.user = await GetUser();
+      Console.WriteLine(ViewBag.user);
+      return View(thisBook);
+    }
+
+    [HttpPost]
+    public ActionResult Checkout(string BookId, string LibraryUserId)
+    {
+      Checkout c = new() { BookId = BookId, LibraryUserId = LibraryUserId };
+      _db.Checkouts.Add(c);
+      Book thisBook = GetBook(BookId);
+      --thisBook.Copies;
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
   }
