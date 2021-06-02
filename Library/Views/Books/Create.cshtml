@@ -1,0 +1,23 @@
+@{
+  ViewData["Title"] = "Books - Create";
+}
+
+@model Library.Models.Book;
+
+<div class="text-center">
+  <h1 class="display-4">Create Book Entry</h1>
+  <div class="container">
+    @using (Html.BeginForm())
+    {
+      @Html.LabelFor(m => m.Title)
+      @Html.TextBoxFor(m => m.Title, null, new { @required="required"})
+
+      @Html.LabelFor(m => m.Copies)
+      @Html.TextBoxFor(m => m.Copies, null, new { type="number", min="0", @required="required" })
+
+    // TODO author association once we have authors
+
+      <input type="submit" value="Create Book Entry" class="btn btn-default" />
+    }
+  </div>
+</div>

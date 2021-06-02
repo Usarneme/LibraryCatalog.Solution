@@ -34,10 +34,13 @@ namespace Library.Controllers
       Console.WriteLine("ClaimTypes.NameId {0}", x);
       Console.WriteLine($"User {userId}");
       Console.WriteLine("CURRENT USER {0}", currentUser);
+      Console.WriteLine("CURRENT USERNAME {0}", currentUser.UserName);
+      Console.WriteLine("Is Librarian: {0}", currentUser.IsLibrarian);
 
+      // if(currentUser.IsLibrarian) ViewBag.
       // for everybody - 1) available books, 2) checked-out books
       // TODO
-      ViewBag.user = currentUser;
+      ViewBag.currentUser = currentUser;
       ViewBag.allBooks = _db.Books.ToList();
       // if Librarian, get: 1) load patrons from checked-out books list
 
@@ -52,21 +55,18 @@ namespace Library.Controllers
       return View();
     }
 
-    // [HttpPost]
-    // public async Task<ActionResult> Create(Book b, string AuthorId)
-    // {
-    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //   var currentUser = await _userManager.FindByIdAsync(userId);
-    //   item.User = currentUser;
-    //   _db.Items.Add(item);
-    //   _db.SaveChanges();
-    //   if (AuthorId != 0) _db.Opera.Add(new Opus() { 
-    //     AuthorId = AuthorId, 
-    //     BookId = b.BookId 
-    //   });
-
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    // public async Task<ActionResult> Create(Book b)
+    public ActionResult Create(Book b)
+    {
+      _db.Books.Add(b);
+      _db.SaveChanges();
+      // if (AuthorId != 0) _db.Opera.Add(new Opus() { 
+      //   AuthorId = AuthorId, 
+      //   BookId = b.BookId 
+      // });
+      // _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
