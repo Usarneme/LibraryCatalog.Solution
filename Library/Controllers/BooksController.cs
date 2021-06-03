@@ -36,6 +36,7 @@ namespace Library.Controllers
       return View();
     }
 
+    [HttpGet("/books/create")]
     public ActionResult Create() => View();
 
     [HttpPost]
@@ -56,6 +57,7 @@ namespace Library.Controllers
     public async Task<ActionResult> Details(string BookId)
     {
       Book thisBook = GetBook(BookId);
+      if (thisBook == null) return RedirectToAction("Index");
       ViewBag.user = await GetUser();
       Console.WriteLine(ViewBag.user);
       return View(thisBook);

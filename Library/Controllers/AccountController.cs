@@ -1,8 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+
 using Library.Models;
 using Library.ViewModels;
 
@@ -21,7 +26,21 @@ namespace Library.Controllers
       _db = db;
     }
 
-    [HttpGet("/account")] public ActionResult Index() => View();
+    public async Task<LibraryUser> GetUser() => await _userManager.FindByIdAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+    [HttpGet("/account")]
+    public async Task<ActionResult> Index()
+    {
+      LibraryUser u = await GetUser();
+      ViewBag.user = u;
+      List<Checkout> checkouts = _db.Checkouts
+        .Where(c => c.LibraryUserId == u.Id)
+        .Include(c => c.Book)
+        .ToList();
+      ViewBag.checkouts = checkouts;
+      return View();
+    }
+
     [HttpGet("/account/register")] public ActionResult Register() => View();
 
     [HttpPost("account/register")]
