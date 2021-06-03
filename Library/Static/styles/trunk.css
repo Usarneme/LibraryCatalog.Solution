@@ -1,0 +1,147 @@
+:root {
+  font-size: 10px;
+  --light-grey: #eee;
+  --color-bg: var(--light-grey);
+}
+
+:root body {
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+:root body * {
+  font-family: Palatino;
+  font-size: 2rem;
+}
+
+:root body header nav,
+:root body main,
+:root body footer div {
+  position: relative;
+  margin: auto;
+  width: calc(100vw - 20px);
+  max-width: 600px;
+}
+
+:root body header {
+  background: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2.4rem;
+}
+
+:root body header nav ul {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: 9rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+:root body header nav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+:root body header nav ul li a {
+  text-decoration: none;
+  color: unset;
+}
+
+:root body main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+:root body main section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+:root body main section form input {
+  border: 1px solid black;
+  margin: 0.8rem;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+}
+
+:root body main section form input[type="submit"] {
+  cursor: pointer;
+}
+
+:root body main section form input[type="submit"]:hover {
+  background: white;
+}
+
+:root body main section ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style-type: none;
+}
+
+:root body main section ul li {
+  position: relative;
+  margin-left: 11rem;
+  margin-bottom: 1.5rem;
+  height: 16rem;
+}
+
+:root body main section ul li::before {
+  content: "";
+  background-image: url("http://placekitten.com/100/160");
+  position: absolute;
+  height: 16rem;
+  width: 10rem;
+  left: -11rem;
+}
+
+:root body footer {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1.85rem;
+  margin-top: 2rem;
+}
+
+:root h1 {
+  font-size: 4rem;
+}
+
+:root h2 {
+  font-size: 3rem;
+}
+
+:root h4 {
+  font-size: 2.5rem;
+}
+/*# sourceMappingURL=trunk.css.map */

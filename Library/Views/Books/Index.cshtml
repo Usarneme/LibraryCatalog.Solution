@@ -3,13 +3,13 @@
   bool IsLibrarian = ViewBag.user.IsLibrarian;
 }
 
-<div class="text-center">
-  <h1 class="display-4">Books</h1>
+<h1>Books</h1>
+<section>
   @if (IsLibrarian)
   {
     <h3>Librarian Books Administration</h3>
   }
-  <div class="container">
+  <div>
     <ul>
       @if (ViewBag.allBooks.Count == 0)
       {
@@ -17,13 +17,13 @@
       }
       else
       {
-        <h4>Total Books: @ViewBag.allBooks.Count</h4>
+        <p>Total Books: @ViewBag.allBooks.Count</p>
         @foreach (Book book in ViewBag.allBooks)
         {
           <li>
-            @book.Title
-            @book.Copies
-            @Html.ActionLink("Check Me Out", book.BookId, "books")
+            <h4>@book.Title</h4>
+            <p>Copies: @book.Copies</p>
+            <p>@Html.ActionLink("Check Me Out", book.BookId, "books")</p>
           </li>
         }
       }
@@ -31,4 +31,4 @@
 
     <a href="/books/create">Create New Book</a>
   </div>
-</div>
+</section>

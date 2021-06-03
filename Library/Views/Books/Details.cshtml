@@ -4,17 +4,16 @@
 
 @model Library.Models.Book;
 
-<div class="text-center">
-  <h1 class="display-4">Checkout Book - @Model.Title</h1>
-  <h2 class="display-4">@Model.Copies Copies Available</h2>
-  <div class="container">
-    @using (Html.BeginForm("Checkout", "Books", new
-    {
-      BookId = Model.BookId,
-      LibraryUserId = ViewBag.user.Id
-    }))
-    {
-      <input type="submit" value="Check Out Book" class="btn btn-default" />
-    }
-  </div>
-</div>
+<section>
+  <h1>Checkout Book - @Model.Title</h1>
+  <h2>@Model.Copies Copies Available</h2>
+
+  @using (Html.BeginForm("Checkout", "Books", new
+  {
+    BookId = Model.BookId,
+    LibraryUserId = ViewBag.user.Id
+  }))
+  {
+    <input type="submit" value="Check Out Book" />
+  }
+</section>

@@ -4,5 +4,7 @@
   background: none;
   border: none;
   outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 /*# sourceMappingURL=reset.css.map */

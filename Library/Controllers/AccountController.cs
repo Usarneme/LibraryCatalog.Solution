@@ -33,11 +33,14 @@ namespace Library.Controllers
     {
       LibraryUser u = await GetUser();
       ViewBag.user = u;
-      List<Checkout> checkouts = _db.Checkouts
-        .Where(c => c.LibraryUserId == u.Id)
-        .Include(c => c.Book)
-        .ToList();
-      ViewBag.checkouts = checkouts;
+      if (u != null)
+      {
+        List<Checkout> checkouts = _db.Checkouts
+          .Where(c => c.LibraryUserId == u.Id)
+          .Include(c => c.Book)
+          .ToList();
+        ViewBag.checkouts = checkouts;
+      }
       return View();
     }
 
